@@ -1,0 +1,12 @@
+Code is tested using a TESTING #define and two functions. Basictest() tests simple functions like helper functions.
+Filetest() parses an array of file names and outputs to a testdump.txt file. The output is then read back and each
+line is tested using asserts.
+
+When testing the parses, for each NAL function there is at least one file which is parsed ok and one which throws an error. 
+For the interpreter there is a test file for each function and some extra files for edge cases. Asserts are also made
+on variables saved in the p->vars mvm.
+
+Limitations: Interp_T cannot be used to test files that causes seg faults. In the regular parser/interpreter the
+ON_FAIL() function will exit the program after writing a message to console. In the testing version it doesn't exit, this is
+so the errors in testdump.txt can be read back after all the files have been executed. This means any bugs which cause 
+seg faults need to be tested using the regular parser/interpreter without the -DTESTING flag.
